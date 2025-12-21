@@ -1,68 +1,209 @@
-<<<<<<< HEAD
-# Fake-Job-Detection
-=======
-# ML project
+🕵️ Fake Job Detection Using Machine Learning & Deep Learning
+📌 Project Overview
 
-Minimal notes for this repository.
+Fake job postings have become a serious problem on online recruitment platforms, deceiving job seekers into financial scams and identity theft.
+This project aims to automatically detect fraudulent job postings using a hybrid machine learning and deep learning approach, combining textual information and structured job attributes.
 
-## What this repo contains
-- code (e.g. `app.py`)
-- dataset: `fake_job_postings.csv`
-- notebooks: `preprocessing.ipynb`
+The system classifies job postings as Legitimate or Fake with high accuracy and provides a probability score indicating fraud risk.
 
-Model files (`*.h5`) are intentionally excluded from the repo by default — see Notes below.
+🎯 Problem Statement
 
-## Quick start (PowerShell)
+Online job portals are increasingly targeted by scammers who post fake job advertisements. Manual verification is slow, error-prone, and not scalable.
+Hence, there is a need for an intelligent automated system that can analyze job postings and flag fraudulent ones.
 
-1. Create & activate a virtual environment
+📂 Dataset Description
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-```
+Dataset Name: Fake Job Postings Dataset
 
-2. Install dependencies (if you have `requirements.txt`)
+Source: Kaggle
 
-```powershell
+Total Records: ~17,880 job postings
+
+Target Variable:
+
+fraudulent →
+
+0 : Legitimate Job
+
+1 : Fake Job
+
+Key Features:
+
+Job title & description
+
+Location, department, industry
+
+Employment type, experience, education
+
+Company logo presence
+
+Telecommuting availability
+
+Salary details
+
+Benefits & requirements
+
+The dataset is highly imbalanced, with fake jobs forming only ~5% of the total data.
+
+⚙️ Feature Engineering
+🅰 Text Features
+
+TF-IDF (Term Frequency–Inverse Document Frequency)
+
+Used for traditional ML models
+
+Converts job descriptions into numerical vectors
+
+Tokenization & Padding
+
+Used for the LSTM deep learning model
+
+Converts text into integer sequences of fixed length
+
+🅱 Structured Features
+
+Salary statistics (min, max, average)
+
+Text length features
+
+Binary indicators:
+
+Company logo presence
+
+Telecommuting
+
+Salary missing
+
+Department missing
+
+Categorical features:
+
+Location
+
+Industry
+
+Employment type
+
+Experience & education level
+
+🧠 Models Implemented
+Machine Learning Models
+
+Logistic Regression
+
+Random Forest
+
+XGBoost
+
+Support Vector Machine (SVM)
+
+Deep Learning Model
+
+LSTM (Long Short-Term Memory)
+
+Captures contextual and sequential patterns in job descriptions
+
+🔗 Hybrid Model (Final Model)
+
+A hybrid ensemble model combining:
+
+Random Forest (Structured Data)
+
+LSTM (Text Data)
+
+This approach leverages:
+
+The interpretability of ML models
+
+The semantic understanding of deep learning
+
+⚖️ Handling Class Imbalance
+
+SMOTE (Synthetic Minority Over-sampling Technique)
+
+Class Weighting in ML models
+
+These techniques ensure better recall for fake job detection.
+
+📊 Model Evaluation Metrics
+📈 Hybrid Model Performance (RF + LSTM)
+Metric	Value
+Accuracy	98.41%
+Precision	95.31%
+Recall	70.52%
+F1 Score	81.06%
+ROC-AUC	98.45%
+Classification Summary:
+
+Very high accuracy on legitimate jobs
+
+Strong precision for fake jobs (low false positives)
+
+Improved recall compared to standalone models
+
+🌐 Web Interface
+
+A Streamlit-based web application allows users to:
+
+Enter job details
+
+Submit job postings
+
+Get instant predictions:
+
+Legitimate Job ✅
+
+Fake Job 🚨
+
+View fraud probability score
+
+▶️ How to Run the Project
+1️⃣ Clone Repository
+git clone https://github.com/Polu-Soneesh-Reddy/Fake-Job-Detection.git
+cd Fake-Job-Detection
+
+2️⃣ Install Dependencies
 pip install -r requirements.txt
-```
 
-3. If you don't have `requirements.txt` yet, create it from your env:
+3️⃣ Run the Web App
+streamlit run app.py
 
-```powershell
-pip freeze > requirements.txt
-```
+🚀 Future Scope
 
-4. Run the app / experiments
+Deployment on cloud platforms (AWS / GCP)
 
-```powershell
-python app.py
-```
+Browser extension for real-time job verification
 
-## Notes & git guidance
-- This repo contains model files (`*.h5`) in the working directory. These are large and should not be committed to a normal Git history.
-- Recommended options:
-  - Keep model files out of the repo and store them in cloud storage (S3, Google Drive, etc.). Use the model filenames in your code and document where to download them.
-  - Or, enable Git LFS for large binary model files: `git lfs install` and `git lfs track "*.h5"`, then commit the `.gitattributes` produced.
-- If you already committed model files, do not push them yet; remove them from history or use `git lfs migrate` / BFG or `git filter-repo` to clean the history.
+Integration with company verification APIs
 
-## Next recommended git steps
-1. Ensure `.gitignore` has been added (it is included here).
-2. `git add` and `git commit` (avoid adding any `.h5` files):
+Use of transformer models (BERT, RoBERTa)
 
-```powershell
-git status
-git add --all
-git commit -m "chore: initial commit (exclude large models)"
-```
+Multilingual fake job detection
 
-3. Create remote repo on GitHub (or other) and push:
+Network analysis of scam recruiters
 
-```powershell
-git remote add origin <url>
-git branch -M main
-git push -u origin main
-```
+📚 Technologies Used
 
-If you want, I can: create a `requirements.txt`, enable Git LFS tracking for `*.h5`, or produce a GitHub Actions CI workflow to run tests and linting.
->>>>>>> 1cfd32f (chore: initial commit (exclude large models))
+Python
+
+Pandas, NumPy
+
+Scikit-learn
+
+TensorFlow / Keras
+
+Imbalanced-learn (SMOTE)
+
+Streamlit
+
+Git & GitHub
+
+👨‍💻 Author
+
+Polu Soneesh Reddy
+Machine Learning Enthusiast | Data Science Student
+
+⭐ Conclusion
+
+This project demonstrates how combining machine learning, deep learning, and feature engineering can effectively detect fraudulent job postings.
+The hybrid approach significantly improves performance and makes the system suitable for real-world deployment.
