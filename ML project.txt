@@ -1,0 +1,93 @@
+ML project 
+
+DataPreprocessing:
+Handling Missing Values
+Some columns have nulls:
+location (~2% missing) → Can fill with "Unknown"
+department (~65% missing) → Maybe drop or encode as "Unknown"
+salary_range (~84% missing) → Drop, or encode "Not Disclosed"
+company_profile, description, requirements, benefits, employment_type, required_experience, required_education, industry, function → Fill "Unknown" or empty string for text features
+
+when it's ok to replace with unknown 
+For features with moderate missing values (<30%), filling with "Unknown" is generally safe.
+For features with very high missing values (>50-60%), consider:
+Dropping the column entirely
+Or creating a binary flag: salary_missing = 1 if salary_range is missing else 0
+
+Data preprocessing is done both textual and structural features
+structural feature like salary_range and department has more amount of missing values we have created a missing flag.
+
+
+what is a missing flag?
+A missing flag (also called a missing indicator variable) is a new column you create to mark which rows originally had missing values in another column.
+| job_id | salary_range | department | salary_range_missing | department_missing |
+| ------ | ------------ | ---------- | -------------------- | ------------------ |
+| 1      | $40k–$60k    | Sales      | 0                    | 0                  |
+| 2      | NaN          | NaN        | 1                    | 1                  |
+| 3      | $100k–$120k  | IT         | 0                    | 0                  |
+
+
+Next Level Feature engineering is done:
+->TF-IDF
+->Salary conversion
+->Label Encoding
+
+
+
+
+WEIGHTAGE OF HYBRID MODEL
+y_test_hybrid_prob = (
+    0.3*y_test_lstm_prob +
+    0.2*y_test_lr_prob +
+    0.2*y_test_rf_prob +
+    0.2*y_test_xgb_prob +
+    0.1*y_test_svm_prob
+)
+
+means:
+
+30% of the decision comes from LSTM (text model)
+
+20% from Logistic Regression (structured)
+
+20% from Random Forest (structured)
+
+20% from XGBoost (structured)
+
+
+
+Then it averages them to produce the final prediction:
+
+y_pred_hybrid = (y_test_hybrid_prob >= 0.5).astype(int)
+
+
+So you’re literally combining five models, not just taking one best model.
+
+✅ This is called ensemble learning (weighted averaging) — it helps reduce errors and gives a more stable result.
+✅ That’s why your final “Hybrid Accuracy” matches or slightly improves over the best structured model — it blends their strengths.
+
+
+
+✅ You explored the dataset
+✅ Handled missing values & imbalance
+✅ Engineered structured + textual features
+✅ Trained multiple models (LR, RF, XGBoost, SVM, LSTM)
+✅ Built a hybrid model combining structured + text-based predictions
+✅ Evaluated and visualized your results
+
+
+
+
+
+✅ 4️⃣ How This Compares to Individual Models
+Model	          Accuracy	Recall (Fake)	F1 Score	ROC-AUC
+RandomForest	      ~97.5%	~0.73	~0.74	~0.98
+LSTM	          ~95.6%	~0.10	~0.19	~0.95
+Hybrid (RF + LSTM)   98.4%	     0.71	 0.81	     0.9845
+
+
+Out of 3,576 total jobs in the test set:
+
+The model correctly classified about 3,520 jobs.
+
+Only ~56 jobs were misclassified (either missed fake jobs or false alarms).

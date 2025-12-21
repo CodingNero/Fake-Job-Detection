@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VSCode
+.vscode/
+
+# IDEs
+.idea/
+*.iml
+
+# Data & models (do not commit large model files)
+*.h5
+*.hdf5
+data/
+models/
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+desktop.ini
