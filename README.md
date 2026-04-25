@@ -203,6 +203,9 @@ Git & GitHub
 Polu Soneesh Reddy
 Machine Learning Enthusiast | Data Science Student
 
+Snehith Chatrathi
+Data Analysis Enthusiast | Data Science Student 
+
 ⭐ Conclusion
 
 This project demonstrates how combining machine learning, deep learning, and feature engineering can effectively detect fraudulent job postings.
